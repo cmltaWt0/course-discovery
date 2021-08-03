@@ -27,7 +27,7 @@ class PersonDocument(BaseDocument):
     salutation = fields.TextField()
 
     def prepare_aggregation_key(self, obj):
-        return 'person:{}'.format(obj.uuid)
+        return f'person:{obj.uuid}'
 
     def prepare_bio_language(self, obj):
         if obj.bio_language:

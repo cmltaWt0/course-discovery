@@ -1,5 +1,4 @@
 import ddt
-import six
 from django.conf import settings
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -48,7 +47,7 @@ class TestCourseSkillView(TestCase):
         expected_context = {}
         expected_context.update(self.admin_context)
 
-        for context_key, expected_value in six.iteritems(expected_context):
+        for context_key, expected_value in expected_context.items():
             assert actual_context[context_key] == expected_value
 
     def _test_get_response(self, response, course_skills):

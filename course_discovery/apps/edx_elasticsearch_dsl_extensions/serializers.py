@@ -104,10 +104,10 @@ class FacetFieldSerializer(serializers.Serializer):
             del query_params[page_query_param]
 
         selected_facets = set(query_params.pop(self.root.facet_query_params_text, []))
-        selected_facets.add('%(field)s_exact:%(text)s' % {'field': self.parent_field, 'text': text})
+        selected_facets.add(f'{self.parent_field}_exact:{text}')
         query_params.setlist(self.root.facet_query_params_text, sorted(selected_facets))
 
-        path = '%(path)s?%(query)s' % {'path': request.path_info, 'query': query_params.urlencode()}
+        path = f'{request.path_info}?{query_params.urlencode()}'
         url = request.build_absolute_uri(path)
         return serializers.Hyperlink(url, 'narrow-url')
 

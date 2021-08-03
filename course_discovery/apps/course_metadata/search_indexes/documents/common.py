@@ -25,7 +25,7 @@ class OrganizationsMixin:
     """
 
     def format_organization(self, organization):
-        return '{key}: {name}'.format(key=organization.key, name=organization.name)
+        return f'{organization.key}: {organization.name}'
 
     def format_organization_body(self, organization):
         # NOTE: Deferred to prevent a circular import:
@@ -127,7 +127,7 @@ class BaseDocument(Document, metaclass=DocumentMeta):
         # pylint: disable=protected-access
         if cls._index._name is None:
             return True
-        return fnmatch(hit.get('_index', ''), '{}*'.format(cls._index._name))
+        return fnmatch(hit.get('_index', ''), f'{cls._index._name}*')
 
     def _get_object(self):
         if self._object is None:
@@ -155,7 +155,7 @@ class BaseDocument(Document, metaclass=DocumentMeta):
         return self.Django.model.__name__.lower()
 
     def prepare_id(self, obj):
-        return '{0}.{1}.{2}'.format(obj._meta.app_label, obj._meta.model_name, obj.pk)
+        return f'{obj._meta.app_label}.{obj._meta.model_name}.{obj.pk}'
 
     def prepare_text(self, obj):
         """
@@ -166,7 +166,7 @@ class BaseDocument(Document, metaclass=DocumentMeta):
         returns the result of rendering that template. ``object`` will be in
         its context.
         """
-        template_names = ['search/indexes/%s/%s_text.txt' % (obj._meta.app_label, obj._meta.model_name)]
+        template_names = [f'search/indexes/{obj._meta.app_label}/{obj._meta.model_name}_text.txt']
         try:
             t = loader.select_template(template_names)
         except TemplateDoesNotExist:

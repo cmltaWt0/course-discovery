@@ -143,7 +143,7 @@ class AdminTests(SiteMixin, TestCase):
         """ Verify that course selection page with posting the data. """
 
         assert 1 == self.program.excluded_course_runs.all().count()
-        assert 3 == sum((1 for _ in self.program.course_runs))
+        assert 3 == sum(1 for _ in self.program.course_runs)
 
         params = {
             'excluded_course_runs': [self.excluded_course_run.id, self.course_runs[0].id],
@@ -157,7 +157,7 @@ class AdminTests(SiteMixin, TestCase):
             target_status_code=200
         )
         assert 2 == self.program.excluded_course_runs.all().count()
-        assert 2 == sum((1 for _ in self.program.course_runs))
+        assert 2 == sum(1 for _ in self.program.course_runs)
 
     def test_page_with_post_without_course_run(self):
         """ Verify that course selection page without posting any selected excluded check run. """
@@ -175,7 +175,7 @@ class AdminTests(SiteMixin, TestCase):
             target_status_code=200
         )
         assert 0 == self.program.excluded_course_runs.all().count()
-        assert 4 == sum((1 for _ in self.program.course_runs))
+        assert 4 == sum(1 for _ in self.program.course_runs)
         response = self.client.get(reverse('admin_metadata:update_course_runs', args=(self.program.id,)))
         self.assertNotContains(response, '<input checked="checked")')
 

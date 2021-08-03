@@ -492,7 +492,7 @@ class CourseRunTests(OAuth2Mixin, TestCase):
 
         seats = factories.SeatFactory.create_batch(3, course_run=self.course_run)
         expected = sorted(seat.type.slug for seat in seats)
-        assert sorted((seat_type.slug for seat_type in self.course_run.seat_types)) == expected
+        assert sorted(seat_type.slug for seat_type in self.course_run.seat_types) == expected
 
     @ddt.data(
         ('obviously-wrong', None,),
@@ -1158,7 +1158,7 @@ class OrganizationTests(TestCase):
 
     def test_str(self):
         """ Verify casting an instance to a string returns a string containing the key and name. """
-        assert str(self.organization) == '{key}: {name}'.format(key=self.organization.key, name=self.organization.name)
+        assert str(self.organization) == f'{self.organization.key}: {self.organization.name}'
 
     def test_marketing_url(self):
         """ Verify the property creates a complete marketing URL. """

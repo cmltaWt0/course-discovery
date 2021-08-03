@@ -77,7 +77,7 @@ class Command(DjangoESDSLCommand):
         specified_backend = options.get('using')
         supported_backends = tuple(settings.ELASTICSEARCH_DSL.keys())
         if specified_backend and specified_backend not in supported_backends:
-            msg = 'Specified backend [{0}] is not supported. Supported backends: {1}'.format(
+            msg = 'Specified backend [{}] is not supported. Supported backends: {}'.format(
                 specified_backend, supported_backends
             )
             raise CommandError(msg)
@@ -128,7 +128,7 @@ class Command(DjangoESDSLCommand):
             index_alias_mapper.registered_index._name = index_alias_mapper.alias  # pylint: disable=protected-access
 
         if indexes_pending:
-            raise CommandError('Sanity check failed for the new index(es): {}'.format(indexes_pending))
+            raise CommandError(f'Sanity check failed for the new index(es): {indexes_pending}')
 
         return True
 
@@ -160,13 +160,13 @@ class Command(DjangoESDSLCommand):
             alternate_current_record_count = conn.search({"query": {"match_all": {}}}, index=new_index_name).get(
                 'hits', {}).get('total', {}).get('value', 0)
             message = '''
-        Sanity check failed for attempt #{0}.
-        Index name: {1}
-        Percentage change: {2}
-        Previous record count: {3}
-        Base record count: {4}
-        Search record count: {5}
-        Aggregation key type: {6}
+        Sanity check failed for attempt #{}.
+        Index name: {}
+        Percentage change: {}
+        Previous record count: {}
+        Base record count: {}
+        Search record count: {}
+        Aggregation key type: {}
                 '''.format(
                 attempt,
                 new_index_name,
@@ -181,11 +181,11 @@ class Command(DjangoESDSLCommand):
             time.sleep(5)
         else:
             message = '''
-        Sanity check passed for attempt #{0}.
-        Index name: {1}
-        Percentage change: {2}
-        Previous record count: {3}
-        Current record count: {4}
+        Sanity check passed for attempt #{}.
+        Index name: {}
+        Percentage change: {}
+        Previous record count: {}
+        Current record count: {}
                 '''.format(
                 attempt,
                 new_index_name,
@@ -225,9 +225,9 @@ class Command(DjangoESDSLCommand):
         timestamp = datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')
         # pylint: disable=protected-access
         computed_alias = ElasticsearchUtils.get_alias_by_index_name(registered_index._name)
-        new_index_name = '{alias}_{timestamp}'.format(alias=computed_alias, timestamp=timestamp)
+        new_index_name = f'{computed_alias}_{timestamp}'
         registered_index._name = new_index_name
-        self.stdout.write("Creating index '{}'".format(registered_index._name))
+        self.stdout.write(f"Creating index '{registered_index._name}'")
         registered_index.create(using=backend)
 
         return computed_alias, new_index_name

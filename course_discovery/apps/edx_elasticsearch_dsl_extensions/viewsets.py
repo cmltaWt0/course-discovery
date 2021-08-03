@@ -39,7 +39,7 @@ class MultiDocumentsWrapper:
         return fields
 
     def dispatch_attr(self, attr):
-        current_attr = '{}{}'.format(self.current_attr and '{}.'.format(self.current_attr), attr)
+        current_attr = '{}{}'.format(self.current_attr and f'{self.current_attr}.', attr)
         # pylint: disable=protected-access
         dispatchers = {
             '_index._name': lambda: [doc._index._name for doc in self._documents],

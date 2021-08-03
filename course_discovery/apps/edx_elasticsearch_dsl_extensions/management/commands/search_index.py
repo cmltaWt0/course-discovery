@@ -41,7 +41,7 @@ class Command(DjangoESDSLCommand):
         specified_backend = options.get('using')
         supported_backends = tuple(settings.ELASTICSEARCH_DSL.keys())
         if specified_backend and specified_backend not in supported_backends:
-            msg = 'Specified backend [{0}] is not supported. Supported backends: {1}'.format(
+            msg = 'Specified backend [{}] is not supported. Supported backends: {}'.format(
                 specified_backend, supported_backends
             )
             raise CommandError(msg)
@@ -79,6 +79,6 @@ class Command(DjangoESDSLCommand):
                 continue
             index_name, *_ = index_alias.keys()
             index._name = index_name
-            self.stdout.write("Deleting index '{}'".format(index._name))
+            self.stdout.write(f"Deleting index '{index._name}'")
             index.delete(ignore=404)
         return True

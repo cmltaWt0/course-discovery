@@ -124,7 +124,7 @@ class TestDistinctCountsSearchQuerySet:
             facet_field, agg.get_aggregation()
         )
         queryset.aggs.bucket(
-            '_query_{0}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
+            '_query_{}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
         )
         dc_queryset = DistinctCountsSearchQuerySet.from_queryset(queryset).with_distinct_counts('aggregation_key')
         facet_counts = dc_queryset.facet_counts()
@@ -162,7 +162,7 @@ class TestDistinctCountsSearchQuerySet:
             facet_field, agg.get_aggregation()
         )
         queryset.aggs.bucket(
-            '_query_{0}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
+            '_query_{}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
         )
         dc_queryset = DistinctCountsSearchQuerySet.from_queryset(queryset).with_distinct_counts('aggregation_key')
         # This should force the query to execute, and the results to be cached
@@ -266,7 +266,7 @@ class TestDistinctCountsSearchQuery:
         )
 
         queryset.aggs.bucket(
-            '_query_{0}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
+            '_query_{}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
         )
 
         assert queryset._distinct_result_count is None
@@ -421,7 +421,7 @@ class TestDistinctCountsElasticsearchQueryWrapper:
         )
 
         queryset.aggs.bucket(
-            '_query_{0}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
+            '_query_{}'.format('hidden'), 'filter', filter=ESDSLQ('bool', filter=ESDSLQ('term', hidden=True))
         )
         querystring_params = queryset.to_dict()
         backend = DistinctCountsElasticsearchQueryWrapper(queryset, 'aggregation_key')

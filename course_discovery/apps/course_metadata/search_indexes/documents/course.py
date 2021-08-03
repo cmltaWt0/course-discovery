@@ -52,7 +52,7 @@ class CourseDocument(BaseCourseDocument):
     start = fields.DateField(multi=True)
 
     def prepare_aggregation_key(self, obj):
-        return 'course:{}'.format(obj.key)
+        return f'course:{obj.key}'
 
     def prepare_availability(self, obj):
         return [str(course_run.availability) for course_run in filter_visible_runs(obj.course_runs)]
@@ -99,7 +99,7 @@ class CourseDocument(BaseCourseDocument):
 
     def prepare_skill_names(self, obj):
         course_skills = get_whitelisted_course_skills(obj.key)
-        return list(set(course_skill.skill.name for course_skill in course_skills))
+        return list({course_skill.skill.name for course_skill in course_skills})
 
     def prepare_skills(self, obj):
         return get_whitelisted_serialized_skills(obj.key)

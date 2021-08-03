@@ -66,7 +66,7 @@ class ProgramDocument(BaseDocument, OrganizationsMixin):
     weeks_to_complete_max = fields.IntegerField()
 
     def prepare_aggregation_key(self, obj):
-        return 'program:{}'.format(obj.uuid)
+        return f'program:{obj.uuid}'
 
     def prepare_credit_backing_organizations(self, obj):
         return self._prepare_organizations(obj.credit_backing_organizations.all())

@@ -82,7 +82,7 @@ class CourseSearchDocumentSerializer(ModelObjectDocumentSerializerMixin, DateTim
 
     def get_skill_names(self, result):
         course_skills = get_whitelisted_course_skills(result.key)
-        return list(set(course_skill.skill.name for course_skill in course_skills))
+        return list({course_skill.skill.name for course_skill in course_skills})
 
     def get_skills(self, result):
         return get_whitelisted_serialized_skills(result.key)

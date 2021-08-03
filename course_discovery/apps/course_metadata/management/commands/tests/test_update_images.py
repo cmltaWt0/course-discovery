@@ -30,7 +30,7 @@ class UpdateImagesCommandTest(TestCase):
     def testBadUrl(self, mock_logger):
         image = ImageFactory()
         initial_src = image.src
-        self.config.image_urls = '{src} not-a-url'.format(src=image.src)
+        self.config.image_urls = f'{image.src} not-a-url'
         self.config.save()
         call_command('update_images')
         mock_logger.warning.assert_called_with('Invalid image url: "not-a-url"')

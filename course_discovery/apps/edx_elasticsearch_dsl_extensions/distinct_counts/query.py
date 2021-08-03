@@ -166,7 +166,7 @@ class DistinctCountsElasticsearchQueryWrapper:
         """
         self.search_instance = search_instance
         self.aggregation_key = aggregation_key
-        self.aggregation_name = 'distinct_{}'.format(aggregation_key)
+        self.aggregation_name = f'distinct_{aggregation_key}'
 
     def search(self, search_query):
         """
@@ -208,7 +208,7 @@ class DistinctCountsElasticsearchQueryWrapper:
 
         if unhandled_facets:
             raise RuntimeError(
-                'DistinctCountsElasticsearchQueryWrapper does not support {} facets.'.format(unhandled_facets)
+                f'DistinctCountsElasticsearchQueryWrapper does not support {unhandled_facets} facets.'
             )
         kwargs['aggs'] = aggregations
 

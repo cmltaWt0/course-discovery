@@ -119,7 +119,7 @@ class FacetedFieldSearchFilterBackend(FacetedSearchFilterBackend):
         field_facets = view.faceted_search_fields
         for field, value in filter_params:
             if not field_facets.get(field):
-                raise ParseError('The selected query facet [{facet}] is not valid.'.format(facet=field))
+                raise ParseError(f'The selected query facet [{field}] is not valid.')
 
             _filters.append(ESDSLQ('term', **{field: value}))
 
@@ -174,7 +174,7 @@ class FacetedQueryFilterBackend(BaseFilterBackend, FilterBackendMixin):
     def aggregate(self, request, queryset, view):
         facets = self.construct_query_filter_facets(request, view)
         for name, query_filter in facets.items():
-            queryset.aggs.bucket('_query_{0}'.format(name), 'filter', filter=query_filter)
+            queryset.aggs.bucket(f'_query_{name}', 'filter', filter=query_filter)
 
         return queryset
 
@@ -185,7 +185,7 @@ class FacetedQueryFilterBackend(BaseFilterBackend, FilterBackendMixin):
         for parm in filter_params:
             query_filter = facets.get(parm)
             if not query_filter:
-                raise ParseError('The selected query facet [{facet}] is not valid.'.format(facet=parm))
+                raise ParseError(f'The selected query facet [{parm}] is not valid.')
             _queries.append(query_filter)
 
         queryset = queryset.query('bool', **{'filter': _queries})

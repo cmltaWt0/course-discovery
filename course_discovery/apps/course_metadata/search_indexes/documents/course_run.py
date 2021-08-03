@@ -79,7 +79,7 @@ class CourseRunDocument(BaseCourseDocument):
 
     def prepare_aggregation_key(self, obj):
         # Aggregate CourseRuns by Course key since that is how we plan to dedup CourseRuns on the marketing site.
-        return 'courserun:{}'.format(obj.course.key)
+        return f'courserun:{obj.course.key}'
 
     def prepare_course_key(self, obj):
         return obj.course.key
@@ -118,7 +118,7 @@ class CourseRunDocument(BaseCourseDocument):
 
     def prepare_skill_names(self, obj):
         course_skills = get_whitelisted_course_skills(obj.course.key)
-        return list(set(course_skill.skill.name for course_skill in course_skills))
+        return list({course_skill.skill.name for course_skill in course_skills})
 
     def prepare_skills(self, obj):
         return get_whitelisted_serialized_skills(obj.course.key)
