@@ -60,7 +60,7 @@ defusedxml==0.7.1
     #   social-auth-core
 django==2.2.24
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/base.in
     #   algoliasearch-django
@@ -195,16 +195,14 @@ drf-extensions==0.7.1
     # via -r requirements/base.in
 drf-jwt==1.19.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   edx-drf-extensions
 dry-rest-permissions==0.1.10
     # via -r requirements/base.in
 edx-analytics-data-api-client==0.17.0
     # via -r requirements/base.in
-edx-auth-backends==3.3.0
+edx-auth-backends==4.0.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -c requirements/constraints.txt
     #   -r requirements/base.in
 edx-ccx-keys==1.2.1
     # via -r requirements/base.in
@@ -218,11 +216,8 @@ edx-django-utils==4.2.0
     #   edx-drf-extensions
     #   edx-rest-api-client
     #   taxonomy-connector
-edx-drf-extensions==6.6.0
-    # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -c requirements/constraints.txt
-    #   -r requirements/base.in
+edx-drf-extensions==7.0.1
+    # via -r requirements/base.in
 edx-opaque-keys==2.2.2
     # via
     #   -r requirements/base.in
@@ -232,7 +227,7 @@ edx-rest-api-client==5.4.0
     # via
     #   -r requirements/base.in
     #   taxonomy-connector
-elasticsearch==7.13.4
+elasticsearch==7.14.0
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -c requirements/constraints.txt
@@ -309,11 +304,11 @@ pycryptodomex==3.10.1
     # via pyjwkest
 pyjwkest==1.4.2
     # via edx-drf-extensions
-pyjwt[crypto]==1.7.1
+pyjwt[crypto]==2.1.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   drf-jwt
     #   edx-auth-backends
+    #   edx-drf-extensions
     #   edx-rest-api-client
     #   social-auth-core
 pymongo==3.12.0
@@ -388,19 +383,16 @@ six==1.16.0
     #   python-dateutil
     #   python-memcached
     #   social-auth-app-django
-    #   social-auth-core
     #   unicode-slugify
 slumber==0.7.1
     # via edx-rest-api-client
 social-auth-app-django==4.0.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
     #   edx-auth-backends
-social-auth-core==4.0.2
+social-auth-core==4.1.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -c requirements/constraints.txt
     #   edx-auth-backends
     #   social-auth-app-django
 soupsieve==2.2.1
