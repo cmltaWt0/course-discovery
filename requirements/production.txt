@@ -95,7 +95,7 @@ django-admin-sortable2==1.0
     # via -r requirements/base.in
 django-appconf==1.0.4
     # via django-compressor
-django-autocomplete-light==3.5.1
+django-autocomplete-light==3.5.0
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/base.in
